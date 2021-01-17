@@ -1,11 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function List() {
-  return (
-    <article>
-      <h2>List</h2>
-    </article>
-  );
-}
-
+const List = () => {
+  return <article></article>;
+};
 export default List;
