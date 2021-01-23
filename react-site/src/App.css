@@ -16,6 +16,10 @@
   margin: 0 auto;
   max-width: var(--max-width);
 }
+.container h2 {
+  text-align: center;
+  margin: 25px auto;
+}
 .item {
   background: var(--clr-white);
   display: flex;
@@ -73,4 +77,17 @@
   text-transform: capitalize;
   border-radius: var(--radius);
   cursor: pointer;
+}
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+.submit-form {
+  max-width: 300px;
+  margin: auto;
+}
+.edit-form {
+  max-width: 300px;
+  margin: auto;
 }

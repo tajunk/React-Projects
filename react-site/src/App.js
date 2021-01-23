@@ -1,38 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import './App.css';
-import CreateList from './CreateList';
-import LoadingList from './LoadingList.js';
+import AddItem from './AddItem';
+import ItemsList from './ItemsList';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [loading, setLoading] = useState(true);
-
-  if (!loading) {
-    return (
-      <main>
-        <LoadingList />
-      </main>
-    );
-  }
   return (
     <div className='App'>
       <div className='container'>
-        <nav>
-          <a href='/'>logo</a>
-          <div>
-            <li>
-              <Link to={'/'}>View Lists</Link>
+        <nav className='navbar navbar-expand navbar-dark bg-dark'>
+          <a href='/ItemsList' className='navbar-brand'>
+            logo
+          </a>
+          <div className='navbar-nav mr-auto'>
+            <li className='nav-item'>
+              <Link to={'/ItemsList'} className='nav-link'>
+                View Lists
+              </Link>
             </li>
-            <li>
-              <Link to={'/CreateList'}>Create New</Link>
+            <li className='nav-item'>
+              <Link to={'/AddItem'} className='nav-link'>
+                Create New
+              </Link>
             </li>
           </div>
         </nav>
-        <div>
+        <div className='container mt-3'>
           <h2>Selection:</h2>
           <Switch>
-            <Route exact path='/CreateList' component={CreateList} />
-            {/* <Route exact path={['/', 'displayLists']} component={DisplayLists} /> */}
+            <Route exact path='/ItemsList' component={ItemsList} />
+            <Route exact path='/AddItem' component={AddItem} />
           </Switch>
         </div>
       </div>

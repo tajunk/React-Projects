@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 
+// OLD VERSION
+
 const CreateList = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

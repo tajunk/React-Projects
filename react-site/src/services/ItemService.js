@@ -1,6 +1,6 @@
 import firebase from '../firebase';
 
-const db = firebase.collection('/lists');
+const db = firebase.collection('/items');
 
 const getAll = () => {
   return db;
@@ -18,11 +18,11 @@ const remove = (id) => {
   return db.doc(id).delete();
 };
 
-const ListService = {
+const ItemService = {
   getAll,
   create,
   update,
   remove,
 };
 
-export default ListService;
+export default ItemService;
