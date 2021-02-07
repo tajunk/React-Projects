@@ -6,7 +6,7 @@ const ListItem = (props) => {
     key: null,
     title: '',
     description: '',
-    published: false,
+    activeStatus: false,
   };
   const [currentListItem, setCurrentListItem] = useState(initialListItemState);
   const [message, setMessage] = useState('');
@@ -22,11 +22,18 @@ const ListItem = (props) => {
     setCurrentListItem({ ...currentListItem, [name]: value });
   };
 
-  const updatePublished = (status) => {
-    DataService.update(currentListItem.id, { published: status })
+  const updateActiveStatus = (status) => {
+    DataService.update(currentListItem.id, { activeStatus: status })
       .then(() => {
-        setCurrentListItem({ ...currentListItem, published: status });
-        setMessage('The status was updated successfully!');
+        setCurrentListItem({ ...currentListItem, activeStatus: status });
+        console.log(currentListItem);
+        if (currentListItem.activeStatus === false) {
+          setMessage('Updated status to active');
+        } else if (currentListItem.activeStatus === true) {
+          setMessage('Updated status to draft');
+        } else {
+          setMessage('Updated status to active');
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -41,7 +48,7 @@ const ListItem = (props) => {
 
     DataService.update(currentListItem.id, data)
       .then(() => {
-        setMessage('The item was updated successfully!');
+        setMessage(currentListItem.title + ' was updated successfully!');
       })
       .catch((e) => {
         console.log(e);
@@ -62,7 +69,7 @@ const ListItem = (props) => {
     <div>
       {currentListItem ? (
         <div className='edit-form'>
-          <h4>Item</h4>
+          <h4>Edit Item</h4>
           <form>
             <div className='form-group'>
               <label htmlFor='title'>Title</label>
@@ -89,35 +96,35 @@ const ListItem = (props) => {
 
             <div className='form-group'>
               <label>
-                <strong>Status:</strong>
+                <strong>Status:&nbsp;</strong>
               </label>
-              {currentListItem.published ? 'Published' : 'Pending'}
+              {currentListItem.activeStatus ? 'Active' : 'Draft'}
             </div>
           </form>
 
-          {currentListItem.published ? (
+          {currentListItem.activeStatus ? (
             <button
-              className='badge badge-primary mr-2'
-              onClick={() => updatePublished(false)}
+              className='badge-primary mr-2 btn-e'
+              onClick={() => updateActiveStatus(false)}
             >
-              UnPublish
+              Draft
             </button>
           ) : (
             <button
-              className='badge badge-primary mr-2'
-              onClick={() => updatePublished(true)}
+              className='badge-primary mr-2 btn-e'
+              onClick={() => updateActiveStatus(true)}
             >
-              Publish
+              Active
             </button>
           )}
 
-          <button className='badge badge-danger mr-2' onClick={deleteListItem}>
+          <button className='badge-danger mr-2 btn-e' onClick={deleteListItem}>
             Delete
           </button>
 
           <button
             type='submit'
-            className='badge badge-success'
+            className='badge-success btn-e'
             onClick={updateListItem}
           >
             Update
@@ -126,7 +133,6 @@ const ListItem = (props) => {
         </div>
       ) : (
         <div>
-          <br />
           <p>Please click on a Item...</p>
         </div>
       )}

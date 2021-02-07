@@ -31,11 +31,11 @@ const ItemsList = () => {
 
   return (
     <div className='list row'>
-      <div className='col-md-6'>
+      <div className='col-md-6 mobileS'>
         <h4>Items List</h4>
         {error && <strong>Error: {error}</strong>}
         {loading && <span>Loading...</span>}
-        <ul className='list-group'>
+        <ul className='list-group pointer'>
           {!loading &&
             listitems &&
             listitems.docs.map((listitem, index) => (
@@ -51,13 +51,14 @@ const ItemsList = () => {
             ))}
         </ul>
       </div>
+
       <div className='col-md-6'>
         {currentListItem ? (
           <ListItem listitem={currentListItem} refreshList={refreshList} />
         ) : (
           <div>
             <br />
-            <p>Please click on a Item...</p>
+            <p>Click on an item to edit it here</p>
           </div>
         )}
       </div>
